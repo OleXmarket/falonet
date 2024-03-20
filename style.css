@@ -19,7 +19,9 @@ body {
 	justify-content: center;
 	min-height: 100vh;
 }
-
+.tak{
+	font-size: 15px;
+}
 .screen {		
 	background: linear-gradient(90deg, #5D54A4, #7C78B8);		
 	position: relative;	
