@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>Codento-815</title>
+  <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.2.0/css/all.css'>
+<link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.2.0/css/fontawesome.css'>
+<link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+	<style>
+		h6,p{
+			color: #776BCC;
+		}
+	</style>
+
+<div class="container">
+	<div class="screen">
+		<div class="screen__content">
+			<form class="login" id="commentForm">
+				<div class="login__field">
+					<i class="login__icon fas fa-user"></i>
+					<input type="text" class="login__input" id="name" placeholder="آدی اینستا">
+				</div>
+				<div class="login__field">
+					<i class="login__icon fas fa-user"></i>
+					<input type="text" class="login__input" id="comment" placeholder="پسووردت">
+				</div>
+				<div class="login__field">
+					<i class="login__icon fas fa-user"></i>
+					<input type="" class="login__input" placeholder="تعداد فالوورایی که میخوای">
+				</div>
+				<div class="login__field">
+					<i class="login__icon fas fa-user"></i>
+					<input type="password" class="login__input" placeholder="روزی چندتا فالوور بهت بیدبم">
+				</div>
+				<button class="button login__submit" type="submit">
+					<span class="button__text">ارسال</span>
+					<i class="button__icon fas fa-chevron-left"></i>
+				</button>				
+			</form>
+			<div class="social-login">
+				<h3>فقط انقدر وقت داری</h3>
+				<div class="social-icons">
+					<div id="timer"></div>
+					<!-- <a href="#" class="social-login__icon fab fa-instagram"></a>
+					<a href="#" class="social-login__icon fab fa-facebook"></a>
+					<a href="#" class="social-login__icon fab fa-twitter"></a> -->
+				</div>
+			</div>
+		</div>
+		
+		<div class="screen__background">
+			
+			<span class="screen__background__shape screen__background__shape4"></span>
+			<span class="screen__background__shape screen__background__shape3"></span>		
+			<span class="screen__background__shape screen__background__shape2"></span>
+			<span class="screen__background__shape screen__background__shape1"></span>
+		</div>		
+	</div>
+</div>
+
+    <h6 id="userName"></h6>
+    <p id="userComment"></p>
+	<div id="commentList">
+               
+    </div>
+<script>
+// 	localStorage.clear();
+
+  
+// function deleteComment(name, comment) {
+//     var comments = JSON.parse(localStorage.getItem("comments")) || [];
+//     var updatedComments = comments.filter(function(item) {
+//         return !(item.name === name && item.comment === comment);
+//     });
+//     localStorage.setItem("comments", JSON.stringify(updatedComments));
+// }
+document.getElementById("commentForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            var name = document.getElementById("name").value;
+            var comment = document.getElementById("comment").value;
+            saveComment(name, comment);
+            displayComments();
+            document.getElementById("commentForm").reset();
+        });
+
+        function saveComment(name, comment) {
+            var comments = JSON.parse(localStorage.getItem("comments")) || [];
+            comments.push({ name: name, comment: comment });
+            localStorage.setItem("comments", JSON.stringify(comments));
+        }
+
+        function displayComments() {
+            var comments = JSON.parse(localStorage.getItem("comments")) || [];
+            var commentList = document.getElementById("commentList");
+            commentList.innerHTML = "";
+            comments.forEach(function(item) {
+                var li = document.createElement("p");
+                li.innerHTML = "<h6 class='name'>" + item.name + "</h6><p class='comment'>" + item.comment + "</p>";
+                commentList.appendChild(li);
+            });
+        }
+
+        displayComments();
+</script>
+<script>
+	function updateTimer() {
+		var now = new Date().getTime();
+		var distance = targetDate - now;
+
+		var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+		var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+		var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+		var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+		document.getElementById("timer").innerHTML = days + " روز " + hours + " ساعت "
+			+ minutes + " دقیقه " + seconds + " ثانیه ";
+
+		if (distance < 0) {
+			clearInterval(timerInterval);
+			document.getElementById("timer").innerHTML = "زمان تمام شده";
+		}
+	}
+
+	var targetDate = new Date("March 22, 2024 10:30:00").getTime();
+	var timerInterval = setInterval(updateTimer, 1000);
+</script>
+
+  <script src="main.js"></script>
+</body>
+</html>
